@@ -4,8 +4,6 @@ from pages.base_page import BasePage
 
 class LoginPage(BasePage):
 
-    URL = "https://www.saucedemo.com/"
-
     USERNAME = (By.ID, "user-name")
 
     PASSWORD = (By.ID, "password")
@@ -15,13 +13,13 @@ class LoginPage(BasePage):
 
     def open(self):
 
-        self.driver.get(self.URL)
+        super().open()
 
 
     def login(self, username, password):
 
-        self.find(self.USERNAME).send_keys(username)
+        self.type(self.USERNAME, username)
 
-        self.find(self.PASSWORD).send_keys(password)
+        self.type(self.PASSWORD, password)
 
-        self.find(self.LOGIN_BTN).click()
+        self.click(self.LOGIN_BTN)
