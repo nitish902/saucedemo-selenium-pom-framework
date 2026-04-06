@@ -10,7 +10,7 @@ def driver():
 
     chrome_options = Options()
 
-    chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument("--headless")
 
     chrome_options.add_argument("--window-size=1920,1080")
 
@@ -20,7 +20,6 @@ def driver():
 
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-
     driver = webdriver.Chrome(
 
         service=Service(ChromeDriverManager().install()),
@@ -29,7 +28,7 @@ def driver():
 
     )
 
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(5)
 
     yield driver
 
