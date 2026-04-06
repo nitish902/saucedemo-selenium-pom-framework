@@ -13,39 +13,25 @@ def driver():
     chrome_options = Options()
 
     chrome_options.add_argument("--headless=new")
-
     chrome_options.add_argument("--window-size=1920,1080")
-
     chrome_options.add_argument("--disable-gpu")
-
     chrome_options.add_argument("--no-sandbox")
-
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-
     driver = webdriver.Chrome(
-
         service=Service(ChromeDriverManager().install()),
-
         options=chrome_options
-
     )
 
     driver.implicitly_wait(10)
 
-
-    # always open website
+    # open login page
     driver.get("https://www.saucedemo.com")
 
-    # always login before every test
+    # perform login using your existing method
     login_page = LoginPage(driver)
 
-    login_page.enter_username("standard_user")
-
-    login_page.enter_password("secret_sauce")
-
-    login_page.click_login()
-
+    login_page.login("standard_user", "secret_sauce")
 
     yield driver
 
