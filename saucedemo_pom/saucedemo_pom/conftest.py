@@ -20,10 +20,6 @@ def driver():
 
     chrome_options.add_argument("--disable-dev-shm-usage")
 
-    chrome_options.add_argument("--disable-infobars")
-
-    chrome_options.add_argument("--disable-extensions")
-
 
     driver = webdriver.Chrome(
 
