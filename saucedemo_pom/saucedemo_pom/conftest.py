@@ -19,22 +19,24 @@ def driver():
     chrome_options.add_argument("--disable-dev-shm-usage")
 
     driver = webdriver.Chrome(
-
         service=Service(ChromeDriverManager().install()),
         options=chrome_options
-
     )
 
     driver.implicitly_wait(10)
 
-    # open saucedemo
+    yield driver
+
+    driver.quit()
+
+
+@pytest.fixture
+def logged_in_driver(driver):
+
     driver.get("https://www.saucedemo.com")
 
-    # login before every test
     login_page = LoginPage(driver)
 
     login_page.login("standard_user", "secret_sauce")
 
-    yield driver
-
-    driver.quit()
+    return driver
