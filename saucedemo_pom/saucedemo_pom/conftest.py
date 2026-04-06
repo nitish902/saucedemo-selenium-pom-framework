@@ -4,6 +4,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+from pages.login_page import LoginPage
+
 
 @pytest.fixture(scope="function")
 def driver():
@@ -21,15 +23,24 @@ def driver():
     chrome_options.add_argument("--disable-dev-shm-usage")
 
     driver = webdriver.Chrome(
-
         service=Service(ChromeDriverManager().install()),
-
         options=chrome_options
-
     )
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
 
     yield driver
 
     driver.quit()
+
+
+@pytest.fixture
+def logged_in_driver(driver):
+
+    login_page = LoginPage(driver)
+
+    login_page.open()
+
+    login_page.login("standard_user", "secret_sauce")
+
+    return driver
